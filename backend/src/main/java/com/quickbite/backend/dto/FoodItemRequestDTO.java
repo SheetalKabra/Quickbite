@@ -1,10 +1,12 @@
 package com.quickbite.backend.dto;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Data
 public class FoodItemRequestDTO {
     private String name;
     private String description;
