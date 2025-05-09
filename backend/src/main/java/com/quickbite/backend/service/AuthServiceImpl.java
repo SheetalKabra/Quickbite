@@ -40,7 +40,7 @@ public class AuthServiceImpl implements AuthService{
         user.setLastName(registerRequestDto.getLastName());
         user.setEmail(registerRequestDto.getEmail());
         user.setMobileNo(registerRequestDto.getMobile());
-        user.setRole(Objects.equals(registerRequestDto.getRole(), "User") ? Role.USER : Role.ADMIN);
+        user.setRole(Objects.equals(registerRequestDto.getRole(), "USER") ? Role.USER : Role.ADMIN);
         user.setPassword(passwordEncoder.encode(registerRequestDto.getPassword()));
         authRepository.save(user);
         return "User registered successfully";
@@ -58,7 +58,6 @@ public class AuthServiceImpl implements AuthService{
             user = authRepository.findByMobileNo(loginRequestDto.getMobile())
                     .orElseThrow(() -> new RuntimeException("User doesn't exists!!!"));
         }
-
         if(!passwordEncoder.matches(loginRequestDto.getPassword(), user.getPassword())){
             throw new RuntimeException("Incorrect password!!!");
         }
