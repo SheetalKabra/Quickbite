@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/foodItems")
 public class FoodItemController {
@@ -39,5 +41,14 @@ public class FoodItemController {
 
         FoodItem savedFoodItem = foodItemService.addFoodItem(foodItem);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedFoodItem);
+    }
+
+    @GetMapping("/getAllItems")
+    public ResponseEntity<List<FoodItem>> getAllItems(){
+        List<FoodItem> items = foodItemService.getAllItems();
+        if(items.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(items);
     }
 }

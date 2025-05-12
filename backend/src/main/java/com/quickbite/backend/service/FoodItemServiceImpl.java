@@ -5,6 +5,8 @@ import com.quickbite.backend.repository.FoodItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FoodItemServiceImpl implements FoodItemService{
     private final FoodItemRepository foodItemRepository;
@@ -16,5 +18,10 @@ public class FoodItemServiceImpl implements FoodItemService{
     @Override
     public FoodItem addFoodItem(FoodItem foodItem) {
         return foodItemRepository.save(foodItem);
+    }
+
+    @Override
+    public List<FoodItem> getAllItems() {
+        return foodItemRepository.findAll();
     }
 }

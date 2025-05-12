@@ -21,7 +21,7 @@ public class FoodItem {
     private String description;
     @Column(nullable = false)
     private Double price;
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
     @Column(nullable = false)
