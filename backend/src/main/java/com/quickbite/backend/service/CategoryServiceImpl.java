@@ -4,6 +4,8 @@ import com.quickbite.backend.model.Category;
 import com.quickbite.backend.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CategoryServiceImpl implements CategoryService{
     private final CategoryRepository categoryRepository;
@@ -19,5 +21,10 @@ public class CategoryServiceImpl implements CategoryService{
     public Category getCategoryById(Long categoryId){
         return categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new RuntimeException("Category not found with Id: "+categoryId));
+    }
+
+    @Override
+    public List<Category> getAllCategories() {
+        return categoryRepository.findAll();
     }
 }
