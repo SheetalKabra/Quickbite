@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@Table(name="items")
-public class Item {
+@Table(name="products")
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,8 +23,8 @@ public class Item {
     @Column(unique = true, nullable = false)
     private String name;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "rest_id", nullable = false)
-    private Restaurants restaurant;
+    @JoinColumn(name = "vendor_id", nullable = false)
+    private Vendor vendor;
     @Column(nullable = false)
     private BigDecimal price;
     @Column(nullable = false)
@@ -64,12 +64,12 @@ public class Item {
         this.name = name;
     }
 
-    public Restaurants getRestaurant() {
-        return restaurant;
+    public Vendor getVendor() {
+        return vendor;
     }
 
-    public void setRestaurant(Restaurants restaurant) {
-        this.restaurant = restaurant;
+    public void setVendor(Vendor vendor) {
+        this.vendor = vendor;
     }
 
     public BigDecimal getPrice() {
