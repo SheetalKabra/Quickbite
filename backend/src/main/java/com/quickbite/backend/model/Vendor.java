@@ -1,5 +1,6 @@
 package com.quickbite.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +20,7 @@ public class Vendor {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="cat_id", nullable = false)
     private Category category;
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String name;
     @CreationTimestamp
     private LocalDateTime createdAt;
