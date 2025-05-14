@@ -19,6 +19,7 @@ public class Vendor {
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="cat_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Category category;
     @Column(nullable = false)
     private String name;
