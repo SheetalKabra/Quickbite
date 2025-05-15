@@ -1,5 +1,6 @@
 package com.quickbite.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,11 +20,13 @@ public class Product {
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="cat_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Category category;
     @Column(nullable = false)
     private String name;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vendor_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Vendor vendor;
     @Column(nullable = false)
     private BigDecimal price;
