@@ -1,5 +1,6 @@
 package com.quickbite.backend.controller;
 
+import com.quickbite.backend.dto.CategoryResponseDto;
 import com.quickbite.backend.model.Category;
 import com.quickbite.backend.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,16 +26,16 @@ public class CategoryController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedCategory);
     }
 
-    @GetMapping("/getAll")
-    public ResponseEntity<List<Category>> getAllCategories(){
-        List<Category> categoryList = categoryService.getAllCategories();
-        return ResponseEntity.ok(categoryList);
-    }
-
     @GetMapping("/get/{id}")
     public ResponseEntity<Category> getCategoryById(@PathVariable Long id){
         Category category = categoryService.getCategoryById(id);
         return ResponseEntity.ok(category);
+    }
+
+    @GetMapping("/getAll")
+    public ResponseEntity<List<CategoryResponseDto>> getAll(){
+        List<CategoryResponseDto> categoryResponseDtoList = categoryService.getAll();
+        return ResponseEntity.ok(categoryResponseDtoList);
     }
 
 }

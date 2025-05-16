@@ -38,6 +38,8 @@ public class Product {
     private String imageUrl;
     @Column(nullable = false)
     private String vegOrNonVeg;
+    @Column(name="is_featured", nullable = false)
+    private boolean isFeatured = false;
     @CreationTimestamp
     private LocalDateTime createdAt;
     @UpdateTimestamp

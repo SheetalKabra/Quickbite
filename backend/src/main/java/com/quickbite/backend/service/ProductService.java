@@ -1,6 +1,7 @@
 package com.quickbite.backend.service;
 
 import com.quickbite.backend.dto.ProductRequestDto;
+import com.quickbite.backend.dto.ProductResponseDto;
 import com.quickbite.backend.model.Product;
 import com.quickbite.backend.repository.ProductRepository;
 import org.springframework.security.core.parameters.P;
@@ -12,5 +13,6 @@ public interface ProductService {
     Product addProduct(ProductRequestDto productRequestDto);
     List<Product> addBulkProduct(List<ProductRequestDto> productRequestDtoList);
     Product getProductById(Long id);
-    List<Product> getAllProduct();
+    List<ProductResponseDto> getAll();
+    List<ProductResponseDto> getAllFeatuedProducts();
 }

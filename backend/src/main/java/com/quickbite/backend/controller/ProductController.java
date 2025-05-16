@@ -1,6 +1,7 @@
 package com.quickbite.backend.controller;
 
 import com.quickbite.backend.dto.ProductRequestDto;
+import com.quickbite.backend.dto.ProductResponseDto;
 import com.quickbite.backend.model.Product;
 import com.quickbite.backend.service.ProductService;
 import org.springframework.http.HttpStatus;
@@ -36,10 +37,14 @@ public class ProductController {
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<Product>> getAllProducts(){
-        List<Product> productList = productService.getAllProduct();
-        return ResponseEntity.ok(productList);
+    public ResponseEntity<List<ProductResponseDto>> getAll(){
+        List<ProductResponseDto> productResponseDtoList = productService.getAll();
+        return ResponseEntity.ok(productResponseDtoList);
     }
 
-
+    @GetMapping("/featured")
+    public ResponseEntity<List<ProductResponseDto>> getAllFeaturedProduct(){
+        List<ProductResponseDto> productResponseDtoList = productService.getAllFeatuedProducts();
+        return ResponseEntity.ok(productResponseDtoList);
+    }
 }

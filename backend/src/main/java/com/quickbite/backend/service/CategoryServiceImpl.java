@@ -1,9 +1,11 @@
 package com.quickbite.backend.service;
 
+import com.quickbite.backend.dto.CategoryResponseDto;
 import com.quickbite.backend.model.Category;
 import com.quickbite.backend.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,7 +26,13 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
     @Override
-    public List<Category> getAllCategories() {
-        return categoryRepository.findAll();
+    public List<CategoryResponseDto> getAll() {
+        List<Category> categoryList= categoryRepository.findAll();
+        List<CategoryResponseDto> categoryResponseDtos = new ArrayList<>();
+        for(Category category: categoryList){
+            CategoryResponseDto categoryResponseDto = new CategoryResponseDto(category.getId(), category.getName());
+            categoryResponseDtos.add(categoryResponseDto);
+        }
+        return categoryResponseDtos;
     }
 }

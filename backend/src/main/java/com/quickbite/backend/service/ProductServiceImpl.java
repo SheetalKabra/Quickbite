@@ -1,6 +1,8 @@
 package com.quickbite.backend.service;
 
+import com.quickbite.backend.dto.CategoryResponseDto;
 import com.quickbite.backend.dto.ProductRequestDto;
+import com.quickbite.backend.dto.ProductResponseDto;
 import com.quickbite.backend.model.Category;
 import com.quickbite.backend.model.Product;
 import com.quickbite.backend.model.Vendor;
@@ -44,8 +46,35 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public List<Product> getAllProduct() {
-        return productRepository.findAll();
+    public List<ProductResponseDto> getAll() {
+        List<Product> productList = productRepository.findAll();
+        List<ProductResponseDto> productResponseDtos = new ArrayList<>();
+        for(Product product: productList){
+            ProductResponseDto productResponseDto = new ProductResponseDto();
+            productResponseDto.setId(product.getId());
+            productResponseDto.setName(product.getName());
+            productResponseDto.setDescription(product.getDescription());
+            productResponseDto.setCategory(new CategoryResponseDto(product.getCategory().getId(), product.getCategory().getName()));
+            productResponseDto.setImage(product.getImageUrl());
+            productResponseDtos.add(productResponseDto);
+        }
+        return productResponseDtos;
+    }
+
+    @Override
+    public List<ProductResponseDto> getAllFeatuedProducts() {
+        List<Product> productList = productRepository.findByIsFeaturedTrue();
+        List<ProductResponseDto> productResponseDtos = new ArrayList<>();
+        for(Product product: productList){
+            ProductResponseDto productResponseDto = new ProductResponseDto();
+            productResponseDto.setId(product.getId());
+            productResponseDto.setName(product.getName());
+            productResponseDto.setDescription(product.getDescription());
+            productResponseDto.setCategory(new CategoryResponseDto(product.getCategory().getId(), product.getCategory().getName()));
+            productResponseDto.setImage(product.getImageUrl());
+            productResponseDtos.add(productResponseDto);
+        }
+        return productResponseDtos;
     }
 
     private Product convertDtoToProduct(ProductRequestDto productRequestDto){
