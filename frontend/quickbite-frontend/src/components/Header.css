@@ -1,0 +1,27 @@
+.header {
+    position: fixed;  /* Fix the header at the top */
+    top: 0;
+    left: 0;
+    width: 98%;
+    height: 60px; /* Adjust as needed */
+    background-color: #6ea63a; /* Adjust color */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 1000; /* Ensure it stays above other content */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.main-content {
+    margin-top: 70px; /* Add margin to prevent content from hiding behind the fixed header */
+    padding: 20px;
+}
+
+
+.header-heading{
+    color: black;
+    font-style: italic;
+    margin-left: 5%;
+}
