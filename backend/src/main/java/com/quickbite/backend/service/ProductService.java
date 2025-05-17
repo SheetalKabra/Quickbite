@@ -3,8 +3,6 @@ package com.quickbite.backend.service;
 import com.quickbite.backend.dto.ProductRequestDto;
 import com.quickbite.backend.dto.ProductResponseDto;
 import com.quickbite.backend.model.Product;
-import com.quickbite.backend.repository.ProductRepository;
-import org.springframework.security.core.parameters.P;
 
 import java.util.List;
 

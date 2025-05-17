@@ -55,7 +55,9 @@ public class ProductServiceImpl implements ProductService{
             productResponseDto.setName(product.getName());
             productResponseDto.setDescription(product.getDescription());
             productResponseDto.setCategory(new CategoryResponseDto(product.getCategory().getId(), product.getCategory().getName()));
-            productResponseDto.setImage(product.getImageUrl());
+            productResponseDto.setImage("http://localhost:8081/backend/uploads/images/products/"+product.getImageUrl());
+            productResponseDto.setVegOrNonVeg(product.getVegOrNonVeg());
+            productResponseDto.setPrice(product.getPrice());
             productResponseDtos.add(productResponseDto);
         }
         return productResponseDtos;
@@ -72,6 +74,9 @@ public class ProductServiceImpl implements ProductService{
             productResponseDto.setDescription(product.getDescription());
             productResponseDto.setCategory(new CategoryResponseDto(product.getCategory().getId(), product.getCategory().getName()));
             productResponseDto.setImage(product.getImageUrl());
+            productResponseDto.setVegOrNonVeg(product.getVegOrNonVeg());
+            productResponseDto.setImage("http://localhost:8081/backend/uploads/images/products/"+product.getImageUrl());
+            productResponseDto.setPrice(product.getPrice());
             productResponseDtos.add(productResponseDto);
         }
         return productResponseDtos;
