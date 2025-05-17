@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @Data
@@ -11,9 +13,10 @@ public class ProductResponseDto {
     private Long id;
     private String name;
     private String description;
-    private Double price;
+    private BigDecimal price;
     private CategoryResponseDto category;
     private String image;
+    private String vegOrNonVeg;
 
     public Long getId() {
         return id;
@@ -39,11 +42,11 @@ public class ProductResponseDto {
         this.description = description;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -61,5 +64,13 @@ public class ProductResponseDto {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getVegOrNonVeg() {
+        return vegOrNonVeg;
+    }
+
+    public void setVegOrNonVeg(String vegOrNonVeg) {
+        this.vegOrNonVeg = vegOrNonVeg;
     }
 }
