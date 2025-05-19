@@ -93,7 +93,7 @@ const Dashboard = () => {
           <div className="banners">
             {banners.map((banner) => (
               <div key={banner.id} className="banner">
-                <img src={banner.image} alt={banner.title} />
+                <img src={banner.imageUrl} alt={banner.title} />
                 <div className="banner-text">
                   <h3>{banner.title}</h3>
                   <p>{banner.description}</p>
