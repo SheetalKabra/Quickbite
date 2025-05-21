@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,6 +24,18 @@ public class Vendor {
     private Category category;
     @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
+    private String imageUrl;
+    private String discountText;
+    @Column(name = "price_for_one")
+    private Integer priceForOne;
+    @Column(name = "delivery_time_in_minutes")
+    private Integer deliveryTimeInMinutes;
+    @ElementCollection
+    @CollectionTable(name = "vendor_cuisines", joinColumns = @JoinColumn(name = "vendor_id"))
+    @Column(name = "cuisine")
+    private List<String> cuisines;
+    private Double rating;
     @CreationTimestamp
     private LocalDateTime createdAt;
     @UpdateTimestamp
@@ -66,5 +79,53 @@ public class Vendor {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getDiscountText() {
+        return discountText;
+    }
+
+    public void setDiscountText(String discountText) {
+        this.discountText = discountText;
+    }
+
+    public Integer getPriceForOne() {
+        return priceForOne;
+    }
+
+    public void setPriceForOne(Integer priceForOne) {
+        this.priceForOne = priceForOne;
+    }
+
+    public Integer getDeliveryTimeInMinutes() {
+        return deliveryTimeInMinutes;
+    }
+
+    public void setDeliveryTimeInMinutes(Integer deliveryTimeInMinutes) {
+        this.deliveryTimeInMinutes = deliveryTimeInMinutes;
+    }
+
+    public List<String> getCuisines() {
+        return cuisines;
+    }
+
+    public void setCuisines(List<String> cuisines) {
+        this.cuisines = cuisines;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
     }
 }
