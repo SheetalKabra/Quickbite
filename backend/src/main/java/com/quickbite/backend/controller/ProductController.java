@@ -42,6 +42,12 @@ public class ProductController {
         return ResponseEntity.ok(productResponseDtoList);
     }
 
+    @GetMapping("/get/vendor/{vendorId}")
+    public ResponseEntity<List<ProductResponseDto>> getProductByVendorId(@PathVariable Long vendorId){
+        List<ProductResponseDto> productResponseDtoList = productService.getProductByVendorId(vendorId);
+        return ResponseEntity.ok(productResponseDtoList);
+    }
+
     @GetMapping("/featured")
     public ResponseEntity<List<ProductResponseDto>> getAllFeaturedProduct(){
         List<ProductResponseDto> productResponseDtoList = productService.getAllFeatuedProducts();

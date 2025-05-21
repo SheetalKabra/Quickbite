@@ -12,5 +12,6 @@ public interface ProductService {
     List<Product> addBulkProduct(List<ProductRequestDto> productRequestDtoList);
     Product getProductById(Long id);
     List<ProductResponseDto> getAll();
+    List<ProductResponseDto> getProductByVendorId(Long vendorId);
     List<ProductResponseDto> getAllFeatuedProducts();
 }
