@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './Dashboard1.css';
+import './Dashboard.css';
+import VendorListPage from './VendorListPage';
 
 const Dashboard = () => {
   const [categories, setCategories] = useState([]);
@@ -10,6 +11,10 @@ const Dashboard = () => {
   const [userProfile, setUserProfile] = useState(null);
   const [cartData, setCartData] = useState(null);
   const [banners, setBanners] = useState([]);
+  const [vendors, setVendors] = useState([]);
+  const [selectedVendor, setSelectedVendor] = useState(null);
+  const [activeCategoryId, setActiveCategoryId] = useState('');
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,7 +68,18 @@ const Dashboard = () => {
           <div
             key={category.id}
             className={`category ${activeCategory === category.name ? 'active' : ''}`}
-            onClick={() => setActiveCategory(category.name)}
+            onClick={async () => {
+                setActiveCategory(category.name);
+                setActiveCategoryId(category.id);
+                setSelectedVendor(null); // reset vendor on category change
+
+                try {
+                    const vendorsRes = await axios.get(`http://localhost:8081/api/v1/vendors/category/${category.id}`);
+                    setVendors(vendorsRes.data);
+                } catch (error) {
+                    console.error('Error fetching vendors:', error);
+                }
+                }}
           >
             {category.name} ({productsByCategory[category.name]?.length || 0})
           </div>
@@ -104,7 +120,7 @@ const Dashboard = () => {
         )}
 
         {/* Featured Products */}
-        {featuredProducts.length > 0 && (
+        {false && featuredProducts.length > 0 && (
           <section className="featured-section">
             <h3>Featured Items</h3>
             <div className="items-list">
@@ -130,7 +146,15 @@ const Dashboard = () => {
           </section>
         )}
 
-        {/* Products by Active Category */}
+        {!selectedVendor && vendors.length > 0 && (
+        <section className="vendor-section">
+            <h3 className="section-title">Best in {activeCategory}</h3>
+            <VendorListPage categoryId={activeCategoryId}></VendorListPage>
+        </section>
+        )}
+
+        {/* Products by Active Category & Vendor */}
+        {false && 
         <section className="category-section">
           <h3 className="section-title">Best in {activeCategory}</h3>
           <div className="items-list">
@@ -154,6 +178,8 @@ const Dashboard = () => {
             ))}
           </div>
         </section>
+        }
+    
       </main>
     </div>
   );

@@ -1,5 +1,5 @@
 /* Layout */
-.dashboard {
+.dashboard, .productDashboard {
   display: flex;
   font-family: Arial, sans-serif;
   height: 100vh;
@@ -14,7 +14,7 @@
   overflow-y: auto;
 }
 
-.category {
+.category, .vendor {
   padding: 0.6rem;
   margin-bottom: 0.4rem;
   border-radius: 6px;
@@ -22,11 +22,11 @@
   transition: background-color 0.2s ease;
 }
 
-.category:hover {
+.category:hover, .vendor:hover {
   background-color: #e0e0e0;
 }
 
-.category.active {
+.category.active, .vendor.active {
   background-color: #4caf50;
   color: white;
   font-weight: bold;
@@ -198,3 +198,63 @@
     margin-top: 10px;
     border-color: ghostwhite;
   }
+
+  .vendor-section {
+  padding: 30px;
+}
+
+.vendor-section h3 {
+  font-size: 28px;
+  margin-bottom: 24px;
+}
+
+.vendor-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.vendor-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+}
+
+.vendor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.vendor-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.vendor-details {
+  padding: 16px;
+  text-align: center;
+}
+
+.vendor-details h4 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.vendor-details p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.badge {
+  background-color: #007bff;
+  color: white;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
