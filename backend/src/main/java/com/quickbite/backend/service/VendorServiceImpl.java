@@ -1,5 +1,6 @@
 package com.quickbite.backend.service;
 
+import com.quickbite.backend.dto.VendorByCategoryResponseDto;
 import com.quickbite.backend.dto.VendorRequestDto;
 import com.quickbite.backend.model.Category;
 import com.quickbite.backend.model.Vendor;
@@ -48,11 +49,31 @@ public class VendorServiceImpl implements VendorService{
     public List<Vendor> getAllVendors() {
         return vendorRepository.findAll();
     }
+
     @Override
     public Vendor getVendorById(Long vendorId) {
         Vendor vendor = vendorRepository.findById(vendorId)
                 .orElseThrow(() -> new RuntimeException("Vendor not found with id: "+ vendorId));
         return vendor;
+    }
+
+    @Override
+    public List<VendorByCategoryResponseDto> getVendorByCategory(Long categoryId) {
+        List<Vendor> vendorList = vendorRepository.findVendorByCategoryId(categoryId);
+        List<VendorByCategoryResponseDto> vendorByCategoryResponseDtoList = new ArrayList<>();
+        for(Vendor vendor: vendorList){
+            VendorByCategoryResponseDto vendorByCategoryResponseDto = new VendorByCategoryResponseDto();
+            vendorByCategoryResponseDto.setId(vendor.getId());
+            vendorByCategoryResponseDto.setName(vendor.getName());
+            vendorByCategoryResponseDto.setImageUrl("http://localhost:8081/backend/uploads/images/vendors/"+vendor.getImageUrl());
+            vendorByCategoryResponseDto.setRating(vendor.getRating());
+            vendorByCategoryResponseDto.setDiscountText(vendor.getDiscountText());
+            vendorByCategoryResponseDto.setDeliveryTimeInMinutes(vendor.getDeliveryTimeInMinutes());
+            vendorByCategoryResponseDto.setPriceForOne(vendor.getPriceForOne());
+            vendorByCategoryResponseDtoList.add(vendorByCategoryResponseDto);
+            vendorByCategoryResponseDto.setCuisines(vendor.getCuisines());
+        }
+        return vendorByCategoryResponseDtoList;
     }
 
 

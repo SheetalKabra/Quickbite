@@ -1,5 +1,6 @@
 package com.quickbite.backend.controller;
 
+import com.quickbite.backend.dto.VendorByCategoryResponseDto;
 import com.quickbite.backend.dto.VendorRequestDto;
 import com.quickbite.backend.model.Vendor;
 import com.quickbite.backend.service.VendorService;
@@ -38,6 +39,12 @@ public class VendorController {
     @GetMapping("/get/{id}")
     public ResponseEntity<Vendor> getVendorById(@PathVariable Long id){
         Vendor vendor = vendorService.getVendorById(id);
+        return ResponseEntity.ok(vendor);
+    }
+
+    @GetMapping("/category/{categoryId}")
+    public ResponseEntity<List<VendorByCategoryResponseDto>> getVendorByCategory(@PathVariable Long categoryId){
+        List<VendorByCategoryResponseDto> vendor = vendorService.getVendorByCategory(categoryId);
         return ResponseEntity.ok(vendor);
     }
 }
