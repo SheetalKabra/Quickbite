@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './VendorListPage.css';
 import { useNavigate } from 'react-router-dom';
+import api from '../api';
 
 export default function VendorListPage({ categoryId }) {
   const [vendors, setVendors] = useState([]);
@@ -10,7 +11,7 @@ export default function VendorListPage({ categoryId }) {
   useEffect(() => {
     const fetchVendors = async () => {
       try {
-        const response = await axios.get(`http://localhost:8081/api/v1/vendors/category/${categoryId}`);
+        const response = await api.get(`/vendors/category/${categoryId}`);
         setVendors(response.data);
       } catch (error) {
         console.error('Error fetching vendors:', error);

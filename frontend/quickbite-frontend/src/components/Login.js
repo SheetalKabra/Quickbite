@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FaFacebookF, FaGoogle, FaLinkedinIn } from "react-icons/fa";
 import "./Login.css";  // Importing custom CSS
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "./AuthContext";
 
 const Login = () => {
+  const { login } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const [loginMethod, setLoginMethod] = useState("EMAIL");
@@ -14,9 +16,11 @@ const Login = () => {
     try {
       const dataWithLoginMethod = { ...data, loginBy: loginMethod };
       const response = await axios.post("http://localhost:8081/api/v1/auth/login", dataWithLoginMethod);
-      localStorage.setItem("token", response.data.token);
-      console.log("token:"+response.data.token);
-      navigate("/dashboard");
+    //   localStorage.setItem("token", response.data.token);
+    //   console.log("token:"+response.data.token);
+        const token = response.data.token;
+        login(token);
+        navigate("/home");
     } catch (error) {
       console.error("Login failed", error);
     }

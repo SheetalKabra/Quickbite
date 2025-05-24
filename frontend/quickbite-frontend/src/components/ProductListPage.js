@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Dashboard.css';
 import { useNavigate, useParams } from 'react-router-dom';
+import api from '../api';
 
 export default function ProductListPage() {
   const { categoryId, vendorId } = useParams();
@@ -23,9 +24,9 @@ export default function ProductListPage() {
           vendors,
           vendorById
         ] = await Promise.all([
-          axios.get(`http://localhost:8081/api/v1/product/get/vendor/${vendorId}`),
-          axios.get(`http://localhost:8081/api/v1/vendors/category/${categoryId}`),
-          axios.get(`http://localhost:8081/api/v1/vendors/get/${vendorId}`),
+          api.get(`/product/get/vendor/${vendorId}`),
+          api.get(`/vendors/category/${categoryId}`),
+          api.get(`/vendors/get/${vendorId}`),
         ]);
         setProducts(products.data);
         setCategoryName(products.data[0].category.name);
@@ -56,7 +57,7 @@ export default function ProductListPage() {
                 setSelectedVendor(null); // reset vendor on vendor change
 
                 try {
-                    const vendorsRes = await axios.get(`http://localhost:8081/api/v1/product/get/vendor/${vendor.id}`);
+                    const vendorsRes = await api.get(`/product/get/vendor/${vendor.id}`);
                     setProducts(vendorsRes.data);
                     setCategoryName(vendorsRes.data[0].category.name);
                 } catch (error) {

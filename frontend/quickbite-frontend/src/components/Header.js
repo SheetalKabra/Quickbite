@@ -1,51 +1,51 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import "./Header.css"; // Custom CSS for styling
+import { AuthContext } from "./AuthContext";
 
 const Header = ({cartCount}) => {
+    const { token, logout } = useContext(AuthContext);
     const [isOpen, setIsOpen] = useState(false);
     const handleToggle = () => setIsOpen(!isOpen);
     const handleLogout = () => {
         localStorage.removeItem("token");
         window.location.href="/login";
     };
+    // const token = localStorage.getItem('token');
   return (
     <header className="header">
       <h1 className="header-heading">QuickBite</h1>
-      <nav>
-        <ul style={styles.navList}>
-          <li><Link style={styles.listStyle} to="/dashboard">Home</Link></li>
-          <li><Link style={styles.listStyle} to="/order-history">My Orders</Link></li>
-          <li><Link style={styles.listStyle} to="/about">About</Link></li>
-          <li><Link style={styles.listStyle} to="/contact">Contact</Link></li>
-          <li><Link to="/cart"style={{ position: "relative", textDecoration: "none", color: "white" }}>
-                    🛒
-                    {cartCount > 0 && (
-                        <span style={{
-                            position: "absolute",
-                            top: "-8px",
-                            right: "-8px",
-                            background: "red",
-                            color: "white",
-                            borderRadius: "50%",
-                            padding: "2px 6px",
-                            fontSize: "12px"
-                        }}>
-                            {cartCount}
-                        </span>
-                    )}
-          
-          </Link></li>
-          <li><Link style={styles.listStyle} to="/"
-          onClick={() => {
-            localStorage.removeItem("token"); // ❌ Remove token
-            window.location.href = "/"; // 🔀 Redirect to login
-        }}
-        >Logout</Link></li>
+    {token &&
+        <nav>
+            <ul style={styles.navList}>
+            <li><Link style={styles.listStyle} to="/home">Home</Link></li>
+            <li><Link style={styles.listStyle} to="/order-history">My Orders</Link></li>
+            <li><Link style={styles.listStyle} to="/about">About</Link></li>
+            <li><Link style={styles.listStyle} to="/contact">Contact</Link></li>
+            <li><Link style={styles.listStyle} to="/cart">
+                        Cart
+                        {cartCount > 0 && (
+                            <span style={{
+                                top: "-8px",
+                                right: "-8px",
+                                background: "red",
+                                color: "white",
+                                borderRadius: "50%",
+                                padding: "2px 6px",
+                                margin: "2px",
+                                fontSize: "12px"
+                            }}>
+                                {cartCount}
+                            </span>
+                        )}
+            
+            </Link></li>
+            <li><Link style={styles.listStyle} to="/" onClick={logout}>Logout</Link></li>
 
-        </ul>
-      </nav>
+            </ul>
+        </nav>
+    }
     </header>
   );
 };

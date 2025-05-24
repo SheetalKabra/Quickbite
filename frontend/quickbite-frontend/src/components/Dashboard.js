@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Dashboard.css';
 import VendorListPage from './VendorListPage';
+import api from '../api';
 
 const Dashboard = () => {
   const [categories, setCategories] = useState([]);
@@ -27,12 +28,12 @@ const Dashboard = () => {
           cartRes,
           bannersRes
         ] = await Promise.all([
-          axios.get('http://localhost:8081/api/v1/categories/getAll'),
-          axios.get('http://localhost:8081/api/v1/product/getAll'),
-          axios.get('http://localhost:8081/api/v1/product/featured'),
-          axios.get('http://localhost:8081/api/v1/user/profile'),
-          axios.get('http://localhost:8081/api/v1/cart'),
-          axios.get('http://localhost:8081/api/v1/banner/active')
+          api.get('/categories/getAll'),
+          api.get('/product/getAll'),
+          api.get('/product/featured'),
+          api.get('/user/profile'),
+          api.get('/cart'),
+          api.get('/banner/active')
         ]);
 
         setCategories(categoriesRes.data);
@@ -74,7 +75,7 @@ const Dashboard = () => {
                 setSelectedVendor(null); // reset vendor on category change
 
                 try {
-                    const vendorsRes = await axios.get(`http://localhost:8081/api/v1/vendors/category/${category.id}`);
+                    const vendorsRes = await api.get(`/vendors/category/${category.id}`);
                     setVendors(vendorsRes.data);
                 } catch (error) {
                     console.error('Error fetching vendors:', error);
