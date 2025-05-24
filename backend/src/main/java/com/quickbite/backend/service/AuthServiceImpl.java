@@ -4,7 +4,7 @@ import com.quickbite.backend.dto.LoginBy;
 import com.quickbite.backend.dto.LoginRequestDto;
 import com.quickbite.backend.dto.LoginResponseDto;
 import com.quickbite.backend.dto.RegisterRequestDto;
-import com.quickbite.backend.model.Role;
+import com.quickbite.backend.model.enums.Role;
 import com.quickbite.backend.model.User;
 import com.quickbite.backend.repository.AuthRepository;
 import com.quickbite.backend.util.JwtUtil;
